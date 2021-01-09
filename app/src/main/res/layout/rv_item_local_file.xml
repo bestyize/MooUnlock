@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="1dp"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="70dp"
+    android:padding="5dp">
+
+    <ImageView
+        android:padding="5dp"
+        android:id="@+id/iv_file_icon"
+        android:layout_width="10dp"
+        android:layout_height="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <LinearLayout
+        android:id="@+id/file_info"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:minWidth="200dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/iv_file_icon"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:textSize="13sp"
+            android:id="@+id/tv_file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="周杰伦 - 告白气球.bkcflac"
+            android:textColor="@color/black"></TextView>
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/tv_file_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:text="2021-01-01 08:00:00"></TextView>
+
+    </LinearLayout>
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/btnDecrypt"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="54dp"
+        android:layout_height="36dp"
+        android:padding="0dp"
+        android:rotationX="0"
+        android:text="解密"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnDel"
+        app:layout_constraintTop_toTopOf="parent"></Button>
+
+    <Button
+        android:id="@+id/btnDel"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="54dp"
+        android:layout_height="36dp"
+        android:padding="0dp"
+        android:text="删除"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></Button>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

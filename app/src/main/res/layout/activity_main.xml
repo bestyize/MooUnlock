@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#f0f0f0">
+
+    <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="文件路径：blackkey/download和qqmusic/song和和qqmusic/cache\n支持qmc、bkc、ele、mqcc加密"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></TextView>
+    <TextView
+        android:layout_marginTop="5dp"
+        style="@style/TextAppearance.AppCompat.Button"
+        android:background="@color/white"
+        android:id="@+id/tvJoinQQ"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="点此加入音乐解锁QQ群"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"></TextView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_local_file"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
