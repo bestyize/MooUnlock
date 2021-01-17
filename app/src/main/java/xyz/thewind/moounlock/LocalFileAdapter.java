@@ -21,6 +21,8 @@ import java.io.File;
 import java.util.Date;
 import java.util.List;
 
+import xyz.thewind.moounlock.event.DecryptMsg;
+
 public class LocalFileAdapter extends RecyclerView.Adapter<LocalFileAdapter.LocalFileViewHolder>{
     private List<LocalFileBean> localFileBeanList;
     private Context context;
@@ -52,7 +54,7 @@ public class LocalFileAdapter extends RecyclerView.Adapter<LocalFileAdapter.Loca
 
         holder.tvFileDesc.setText(formatFileSize(fileBean.getFileSize())+"\t"+time);
 
-        if(fileBean.getFileName().contains(".bkc")||fileBean.getFileName().contains(".qmc")||fileBean.getFileName().contains(".efe")||fileBean.getFileName().contains(".mqcc")){
+        if(fileBean.getFileSize()>0x5000&&!fileBean.getFileName().endsWith(".mp3")&&!fileBean.getFileName().endsWith(".flac")){
             holder.btnDecrypt.setVisibility(View.VISIBLE);
         }
         holder.btnDecrypt.setOnClickListener(v -> {
@@ -60,9 +62,10 @@ public class LocalFileAdapter extends RecyclerView.Adapter<LocalFileAdapter.Loca
                 @Override
                 public void run() {
                     if(FileDecrypt.decrypt(fileBean.getPath())){
-                        Toast.makeText(context,"解密成功,存放位置："+fileBean.getPath().substring(0,fileBean.getPath().lastIndexOf(File.separator)),Toast.LENGTH_LONG).show();
+                        String msg="解密成功,存放位置："+fileBean.getPath().substring(0,fileBean.getPath().lastIndexOf(File.separator));
+                        EventBus.getDefault().post(new DecryptMsg(msg));
                     }else {
-                        Toast.makeText(context,"解密失败",Toast.LENGTH_SHORT).show();
+                        EventBus.getDefault().post(new DecryptMsg("解密失败"));
                     }
                     EventBus.getDefault().post("刷新："+fileBean.getFileName());
                 }
@@ -85,7 +88,7 @@ public class LocalFileAdapter extends RecyclerView.Adapter<LocalFileAdapter.Loca
 
     private String formatFileSize(long fileSize){
         if(fileSize<1024){
-            return String.format("%.2f", (fileSize))+"B";
+            return fileSize+"B";
         }else if(fileSize<1024*1024){
             return String.format("%.2f", (fileSize+0.0)/1024)+"KB";
         }else {
