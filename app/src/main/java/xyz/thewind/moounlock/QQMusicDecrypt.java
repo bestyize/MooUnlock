@@ -18,7 +18,7 @@ public class QQMusicDecrypt {
 
     public static boolean decrypt(String fullPath){
         try {
-            return decrypt(fullPath,false,false,"");
+            return decrypt(fullPath,true,false,"");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,6 +53,8 @@ public class QQMusicDecrypt {
             return decryptMqccFile(fullPath);
         }else if(fullPath.endsWith(".flac.0")){
             return decryptFlacZeroFile(fullPath);
+        }else if(fullPath.endsWith(".1")){
+            return decryptOneFile(fullPath);
         }else if (fullPath.endsWith(".flac.efe") || fullPath.endsWith(".mp3.efe")){
             return decryptEfeFile(fullPath);
         }else if(fullPath.endsWith(".mflac")||fullPath.endsWith(".mgg")){//未实现
@@ -60,7 +62,7 @@ public class QQMusicDecrypt {
         }else if (fullPath.endsWith(".mflac.cache")||fullPath.endsWith(".mgg.cache")){
             return decryptMCacheFile(fullPath);
         }
-       return false;
+        return false;
     }
 
     /**
@@ -181,7 +183,7 @@ public class QQMusicDecrypt {
      * @return
      * @throws Exception
      */
-    private static boolean decryptZeroFile(String fullPath)throws Exception{
+    private static boolean decryptOneFile(String fullPath)throws Exception{
         return decryptEfeZeroFile(fullPath,0x510,36);
     }
 
@@ -262,11 +264,12 @@ public class QQMusicDecrypt {
                 return fullPath.replace(".mflac",".flac");
             }
             return fullPath.replace(".mgg",".mp3");
-        }else if(fullPath.endsWith(".flac.0")||fullPath.endsWith(".flac.-1310027065.1")){//Moo缓存文件。存放目录在Android/data/com.tencent.blackkey/files/sd_card_migrated/audio_cache
+        }else if(fullPath.endsWith(".flac.0")||fullPath.endsWith(".1")){//Moo缓存文件。存放目录在Android/data/com.tencent.blackkey/files/sd_card_migrated/audio_cache
             if(fullPath.endsWith(".flac.0")){
                 return fullPath.replace(".flac.0",".flac");//没加密的缓存文件
             }
-            return fullPath.replace(".flac.-1310027065.1",".flac");//加密的缓存文件
+            fullPath=fullPath.replace(".1","");
+            return fullPath.substring(0,fullPath.lastIndexOf("."));//加密的缓存文件
         }
         return "";
     }
