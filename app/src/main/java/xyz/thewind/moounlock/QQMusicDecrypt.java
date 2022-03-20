@@ -356,6 +356,9 @@ public class QQMusicDecrypt {
             decryptFile=new File(fullPath);
         }
         String newName=getCorrectMusicFileName(fullPath);
+        if (newName.equals(fullPath)) {
+            return fullPath;
+        }
         boolean succ=decryptFile.renameTo(new File(newName));
         if(succ){
             decryptFile.delete();
